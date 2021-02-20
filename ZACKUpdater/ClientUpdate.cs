@@ -1,21 +1,21 @@
-﻿using System;
-using System.Net;
+using System;
 using System.ComponentModel;
-using System.IO.Compression;
 using System.IO;
+using System.IO.Compression;
+using System.Net;
 
 namespace ZACKUpdater
 {
     class ClientUpdate
     {
-        WebClient client = new WebClient();
+        readonly WebClient _client = new WebClient();
 
         private string downloadedFile { get; set; }
 
         public void Install(Uri address, string compressedFile)
         {
-            client.DownloadFileCompleted += new AsyncCompletedEventHandler(Extract);
-            client.DownloadFileAsync(address, compressedFile);
+            _client.DownloadFileCompleted += new AsyncCompletedEventHandler(Extract);
+            _client.DownloadFileAsync(address, compressedFile);
             downloadedFile = compressedFile;
         }
 
@@ -23,9 +23,9 @@ namespace ZACKUpdater
         {
             try
             {
-                using (ZipArchive archive = ZipFile.OpenRead(downloadedFile))
+                using (var archive = ZipFile.OpenRead(downloadedFile))
                 {
-                    foreach (ZipArchiveEntry ex in archive.Entries)
+                    foreach (var ex in archive.Entries)
                     {
                         ex.ExtractToFile(Path.Combine(Environment.CurrentDirectory, ex.FullName), true);
                     }

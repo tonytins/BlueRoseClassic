@@ -1,4 +1,4 @@
-﻿// http://www.codeproject.com/Articles/11556/Converting-Wildcards-to-Regexes
+// http://www.codeproject.com/Articles/11556/Converting-Wildcards-to-Regexes
 using System.Text.RegularExpressions;
 
 namespace BlueRose
@@ -36,9 +36,7 @@ namespace BlueRose
         /// <returns>A regex equivalent of the given wildcard.</returns>
         public static string WildcardToRegex(string pattern)
         {
-            return "^" + Regex.Escape(pattern).
-             Replace("\\*", ".*").
-             Replace("\\?", ".") + "$";
+            return $"^{Escape(pattern).Replace("\\*", ".*").Replace("\\?", ".")}$";
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿// Copyright(C) 2016  Blue Rose Project
+// Copyright(C) 2016  Blue Rose Project
 
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -27,12 +27,12 @@ namespace BlueRose
 {
     public partial class BlueRoseGUI : Form
     {
-        private string errorBtn = "ERROR";
-        WebClient client = new WebClient();
-        string netBuild = "#" + WhiteRose.DistNumLegacy();
-        string buildFile = "fsobuild";
-        string simplyupdate = "simplyupdate.zip";
-        string blupdateraddress = "https://dl.dropboxusercontent.com/u/42345729/simplyupdateb.zip";
+        private readonly string _errorBtn = "ERROR";
+        readonly WebClient _client = new WebClient();
+        string _netBuild = $"#{WhiteRose.DistNumLegacy()}";
+        readonly string _buildFile = "fsobuild";
+        readonly string _simplyupdate = "simplyupdate.zip";
+        readonly string _blupdateraddress = "https://dl.dropboxusercontent.com/u/42345729/simplyupdateb.zip";
 
         public BlueRoseGUI()
         {
@@ -40,22 +40,22 @@ namespace BlueRose
             {
                 InitializeComponent();
 
-                this.MaximizeBox = false;
-                this.MinimizeBox = false;
+                MaximizeBox = false;
+                MinimizeBox = false;
 
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
- 
+
         }
 
         private void updaterdownload(object sender, AsyncCompletedEventArgs e)
         {
-            using (ZipFile zip2 = ZipFile.Read(simplyupdate))
+            using (var zip2 = ZipFile.Read(_simplyupdate))
             {
-                foreach (ZipEntry ex in zip2)
+                foreach (var ex in zip2)
                 {
                     ex.Extract(Environment.CurrentDirectory, ExtractExistingFileAction.OverwriteSilently);
                 }
@@ -67,7 +67,7 @@ namespace BlueRose
         private void playBtn_Click(object sender, EventArgs e)
         {
             WhiteRose.StartFSO("FreeSO.exe", parmaBox.Text);
-           
+
         }
 
         private void devBtn_Click(object sender, EventArgs e)
@@ -79,32 +79,32 @@ namespace BlueRose
         {
             WhiteRose.ZipGC();
 
-            string distroDLL = "BlueRose.Distro.dll";
-            string distroPdb = "BlueRose.Distro.pdb";
-            if (File.Exists(distroDLL) && File.Exists(distroPdb))
+            var distroDll = "BlueRose.Distro.dll";
+            var distroPdb = "BlueRose.Distro.pdb";
+            if (File.Exists(distroDll) && File.Exists(distroPdb))
             {
-                File.Delete(distroDLL);
+                File.Delete(distroDll);
                 File.Delete(distroPdb);
             }
 
             try
             {
-                localBuild.Text = WhiteRose.ReadBuild(buildFile);
-                onlineBuildLabel.Text = "#" + WhiteRose.DistNumLegacy();
-                this.Text = "BlueRose v" + WhiteRose.appVersion;
+                localBuild.Text = WhiteRose.ReadBuild(_buildFile);
+                onlineBuildLabel.Text = $"#{WhiteRose.DistNumLegacy()}";
+                Text = $"BlueRose v{WhiteRose.appVersion}";
 
 #if DEBUG
-                Ping pinger = new Ping();
-                bool pingable = false;
+                var pinger = new Ping();
+                var pingable = false;
 
                 try
                 {
-                    PingReply reply = pinger.Send(blupdateraddress);
+                    var reply = pinger.Send(_blupdateraddress);
                     if (pingable = reply.Status == IPStatus.Success)
                     {
-                        client.DownloadFileCompleted += new AsyncCompletedEventHandler(updaterdownload);
+                        _client.DownloadFileCompleted += new AsyncCompletedEventHandler(updaterdownload);
 
-                        client.DownloadFileAsync(new Uri(blupdateraddress), simplyupdate);
+                        _client.DownloadFileAsync(new Uri(_blupdateraddress), _simplyupdate);
                     }
                 }
                 catch (PingException ex)
@@ -132,9 +132,9 @@ namespace BlueRose
             try
             {
                 WhiteRose.ZipGcCompat();
-                
-                client.DownloadFileCompleted += new AsyncCompletedEventHandler(freeSODownloadCompleted);
-                client.DownloadFileAsync(TeamCity.teamCityAddress(), "teamcity.zip");
+
+                _client.DownloadFileCompleted += new AsyncCompletedEventHandler(freeSODownloadCompleted);
+                _client.DownloadFileAsync(TeamCity.teamCityAddress(), "teamcity.zip");
                 idleProgressBar.Style = ProgressBarStyle.Marquee;
                 btnUpdate.Text = "Update FreeSO";
                 btnUpdate.Enabled = false;
@@ -148,11 +148,11 @@ namespace BlueRose
 #if DEBUG
                 MessageBox.Show(ex.Message);
 #endif
-                btnUpdate.Text = errorBtn;
+                btnUpdate.Text = _errorBtn;
                 btnUpdate.Enabled = false;
             }
-            
-            
+
+
         }
 
         void freeSODownloadCompleted(object sender, AsyncCompletedEventArgs e)
@@ -169,9 +169,9 @@ namespace BlueRose
                 devBtn.Enabled = true;
                 playBtn.Enabled = true;
 
-                WhiteRose.WriteBuild(buildFile);
+                WhiteRose.WriteBuild(_buildFile);
 
-                localBuild.Text = WhiteRose.ReadBuild(buildFile);
+                localBuild.Text = WhiteRose.ReadBuild(_buildFile);
                 idleProgressBar.Style = ProgressBarStyle.Blocks;
                 btnUpdate.Text = "Update FreeSO";
             }
@@ -180,7 +180,7 @@ namespace BlueRose
 #if DEBUG
                 MessageBox.Show(ex.Message);
 #endif
-                btnUpdate.Text = errorBtn;
+                btnUpdate.Text = _errorBtn;
                 localBuild.Text = "?";
                 btnUpdate.Enabled = false;
                 devBtn.Enabled = false;
@@ -188,13 +188,13 @@ namespace BlueRose
             }
 
         }
-        
+
 
         private void btnUpdateLauncher_Click(object sender, EventArgs e)
         {
             try
             {
-                ProcessStartInfo newProccess = new ProcessStartInfo("SimplyUpdate.exe");
+                var newProccess = new ProcessStartInfo("SimplyUpdate.exe");
                 newProccess.UseShellExecute = true;
                 newProccess.Verb = "runas";
                 Process.Start(newProccess);
@@ -217,7 +217,7 @@ namespace BlueRose
         {
             try
             {
-                onlineBuildLabel.Text = "#" + WhiteRose.DistNumLegacy();
+                onlineBuildLabel.Text = $"#{WhiteRose.DistNumLegacy()}";
             }
             catch
             {

@@ -1,23 +1,23 @@
-﻿using System;
-using System.Net;
+using System;
 using System.ComponentModel;
-using System.IO.Compression;
-using System.IO;
 using System.Diagnostics;
+using System.IO;
+using System.IO.Compression;
+using System.Net;
 
 namespace ZACKUpdater
 {
     public class SelfUpdate
     {
-        WebClient client = new WebClient();
+        readonly WebClient _client = new WebClient();
 
         private string downloadedFile { get; set; }
         public static string newProccessInfo { get; set; }
 
         public void Install(Uri address, string compressedFile, string newProcess)
         {
-            client.DownloadFileCompleted += new AsyncCompletedEventHandler(ExtractExit);
-            client.DownloadFileAsync(address, compressedFile);
+            _client.DownloadFileCompleted += new AsyncCompletedEventHandler(ExtractExit);
+            _client.DownloadFileAsync(address, compressedFile);
             newProccessInfo = newProcess;
             downloadedFile = compressedFile;
         }
@@ -26,9 +26,9 @@ namespace ZACKUpdater
         {
             try
             {
-                using (ZipArchive archive = ZipFile.OpenRead(downloadedFile))
+                using (var archive = ZipFile.OpenRead(downloadedFile))
                 {
-                    foreach (ZipArchiveEntry ex in archive.Entries)
+                    foreach (var ex in archive.Entries)
                     {
                         ex.ExtractToFile(Path.Combine(Environment.CurrentDirectory, ex.FullName), true);
                     }
@@ -36,15 +36,16 @@ namespace ZACKUpdater
 
                 UpdateGC.GC();
 
-                try {
-                    ProcessStartInfo newProccess = new ProcessStartInfo(newProccessInfo);
+                try
+                {
+                    var newProccess = new ProcessStartInfo(newProccessInfo);
                     newProccess.UseShellExecute = true;
                     newProccess.Verb = "runas";
                     Process.Start(newProccess);
                     Environment.Exit(0);
                 }
-                catch (Exception ex )
-                { Console.WriteLine(ex.Message);  }
+                catch (Exception ex)
+                { Console.WriteLine(ex.Message); }
 
             }
             catch (Exception ex)

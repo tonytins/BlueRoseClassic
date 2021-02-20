@@ -1,4 +1,4 @@
-﻿// Copyright(C) 2016  Blue Rose Project
+// Copyright(C) 2016  Blue Rose Project
 
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,17 +15,17 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Windows.Forms;
-using System.Text.RegularExpressions;
-using Ionic.Zip;
-using System.Net;
 using System.Linq;
-using System.Net.NetworkInformation;
-using System.Text;
-using System.Collections;
+using System.Net;
 using System.Reflection;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
+using Ionic.Zip;
+
 namespace BlueRose
 {
     public class WhiteRose
@@ -43,8 +43,8 @@ namespace BlueRose
         /// <returns></returns>
         public static FileInfo[] FileWildCard(string fileExt)
         {
-            DirectoryInfo dir = new DirectoryInfo(Environment.CurrentDirectory);
-            FileInfo[] files = dir.GetFiles("*." + fileExt.ToLower()).Where(p => p.Extension == "." + fileExt.ToLower()).ToArray();
+            var dir = new DirectoryInfo(Environment.CurrentDirectory);
+            var files = dir.GetFiles($"*.{fileExt.ToLower()}").Where(p => p.Extension == $".{fileExt.ToLower()}").ToArray();
             return files;
         }
 
@@ -55,14 +55,14 @@ namespace BlueRose
         /// <returns></returns>
         public static FileInfo[] FileWildCard(string fileExt, string fileDir)
         {
-            DirectoryInfo dir = new DirectoryInfo(fileDir);
-            FileInfo[] files = dir.GetFiles("*." + fileExt.ToLower()).Where(p => p.Extension == "." + fileExt.ToLower()).ToArray();
+            var dir = new DirectoryInfo(fileDir);
+            var files = dir.GetFiles($"*.{fileExt.ToLower()}").Where(p => p.Extension == $".{fileExt.ToLower()}").ToArray();
             return files;
         }
 
         /// <summary>
         /// Returns a given URL. If it isn't there,
-        /// defualt to Google.
+        /// default to Google.
         /// </summary>
         /// <param name="url"></param>
         /// <returns>new Uri(url);</returns>
@@ -105,11 +105,16 @@ namespace BlueRose
 
             try
             {
-                Process fsoProcess = new Process();
+                var fsoProcess = new Process
+                {
+                    StartInfo =
+                    {
+                        FileName = fso,
+                        UseShellExecute = true,
+                        Arguments = ConvertStringArrayToString(fsoParmas)
+                    }
+                };
 
-                fsoProcess.StartInfo.FileName = fso;
-                fsoProcess.StartInfo.UseShellExecute = true;
-                fsoProcess.StartInfo.Arguments = ConvertStringArrayToString(fsoParmas);
                 fsoProcess.Start();
 
             }
@@ -124,11 +129,16 @@ namespace BlueRose
 
             try
             {
-                Process fsoProcess = new Process();
+                var fsoProcess = new Process
+                {
+                    StartInfo =
+                {
+                    FileName = fso,
+                    UseShellExecute = true,
+                    Arguments = args
+                }
+                };
 
-                fsoProcess.StartInfo.FileName = fso;
-                fsoProcess.StartInfo.UseShellExecute = true;
-                fsoProcess.StartInfo.Arguments = args;
                 fsoProcess.Start();
 
             }
@@ -145,18 +155,22 @@ namespace BlueRose
         /// <returns>sLine</returns>
         public static string DistNumLegacy()
         {
-            string url = "http://servo.freeso.org/externalStatus.html?js=1";
-            WebRequest wrGETURL;
-            wrGETURL = WebRequest.Create(url);
-            Stream objStream;
-            objStream = wrGETURL.GetResponse().GetResponseStream();
-            StreamReader objReader = new StreamReader(objStream);
-            string sLine = "";
-            string fll;
-            fll = objReader.ReadLine();
-            sLine = fll.Remove(0, 855);
-            sLine = sLine.Remove(sLine.IndexOf("</a>"));
-            return sLine;
+            try
+            {
+                const string url = "http://servo.freeso.org/externalStatus.html?js=1";
+                var wrGeturl = WebRequest.Create(url);
+                var objStream = wrGeturl.GetResponse().GetResponseStream();
+                var objReader = new StreamReader(objStream);
+                var sLine = "";
+                var fll = objReader.ReadLine();
+                sLine = fll.Remove(0, 855);
+                sLine = sLine.Remove(sLine.IndexOf("</a>", StringComparison.Ordinal));
+                return sLine;
+            }
+            catch
+            {
+                return "NONE";
+            }
         }
 
         /// <summary>
@@ -166,15 +180,14 @@ namespace BlueRose
         /// <returns></returns>
         public static string ReadBuild(string file)
         {
-            string line;
-
             try
             {
-                string buildFile = Environment.CurrentDirectory + @"/" + file;
-                StreamReader fileRead = new StreamReader(buildFile);
+                var buildFile = $@"{Environment.CurrentDirectory}/{file}";
+                var fileRead = new StreamReader(buildFile);
+                string line;
                 while ((line = fileRead.ReadLine()) != null)
                 {
-                    return "#" + line;
+                    return $"#{line}";
                 }
 
                 fileRead.Close();
@@ -193,8 +206,8 @@ namespace BlueRose
         /// <param name="file"></param>
         public static void WriteBuild(string file)
         {
-            string buildFile = Environment.CurrentDirectory + @"/" + file;
-            string localDist = DistNumLegacy();
+            var buildFile = $@"{Environment.CurrentDirectory}/{file}";
+            var localDist = DistNumLegacy();
 
             try
             {
@@ -212,16 +225,14 @@ namespace BlueRose
         /// </summary>
         public static void ZipGcCompat()
         {
-            
-            Wildcard wildZip = new Wildcard("*.zip", RegexOptions.IgnoreCase);
-            string[] files = Directory.GetFiles(Environment.CurrentDirectory);
 
-            foreach (string file in files)
+            var wildZip = new Wildcard("*.zip", RegexOptions.IgnoreCase);
+            var files = Directory.GetFiles(Environment.CurrentDirectory);
+
+            foreach (var file in files)
             {
                 if (wildZip.IsMatch(file))
-                {
                     File.Delete(file);
-                }
             }
         }
 
@@ -230,9 +241,9 @@ namespace BlueRose
         /// </summary>
         public static void ZipGC()
         {
-            FileInfo[] files = FileWildCard("zip");
+            var files = FileWildCard("zip");
 
-            foreach (FileInfo file in files)
+            foreach (var file in files)
             {
                 try
                 {
@@ -245,28 +256,27 @@ namespace BlueRose
                 }
             }
         }
-        
+
         /// <summary>
         /// Detects for any present zips and unpacks them.
         /// Uses Code Project's Wildcard class.
         /// </summary>
         public static void WildUnZipCompat()
         {
-            Wildcard unpacker = new Wildcard("*.zip", RegexOptions.IgnoreCase);
+            var unpacker = new Wildcard("*.zip", RegexOptions.IgnoreCase);
 
             // Get a list of files in the My Documents folder
-            string[] files = Directory.GetFiles(Environment.CurrentDirectory);
+            var files = Directory.GetFiles(Environment.CurrentDirectory);
 
-            foreach (string file in files)
+            foreach (var file in files)
             {
-                if (unpacker.IsMatch(file))
+                if (!unpacker.IsMatch(file))
+                    continue;
+                using (var zip2 = ZipFile.Read(file))
                 {
-                    using (ZipFile zip2 = ZipFile.Read(file))
+                    foreach (var ex in zip2)
                     {
-                        foreach (ZipEntry ex in zip2)
-                        {
-                            ex.Extract(Environment.CurrentDirectory, ExtractExistingFileAction.OverwriteSilently);
-                        }
+                        ex.Extract(Environment.CurrentDirectory, ExtractExistingFileAction.OverwriteSilently);
                     }
                 }
             }
@@ -275,16 +285,16 @@ namespace BlueRose
         /// <summary>
         /// Detects for any present zips and unpacks them.
         /// </summary>
-        public static void wildUnZip()
+        public static void WildUnZip()
         {
-            DirectoryInfo dir = new DirectoryInfo(Environment.CurrentDirectory);
-            FileInfo[] files = dir.GetFiles("*.zip").Where(p => p.Extension == ".zip").ToArray();
+            var dir = new DirectoryInfo(Environment.CurrentDirectory);
+            var files = dir.GetFiles("*.zip").Where(p => p.Extension == ".zip").ToArray();
 
-            foreach (FileInfo file in files)
+            foreach (var file in files)
             {
-                using (ZipFile zip2 = ZipFile.Read(file.FullName))
+                using (var zip2 = ZipFile.Read(file.FullName))
                 {
-                    foreach (ZipEntry ex in zip2)
+                    foreach (var ex in zip2)
                     {
                         ex.Extract(Environment.CurrentDirectory, ExtractExistingFileAction.OverwriteSilently);
                     }
@@ -297,13 +307,13 @@ namespace BlueRose
         /// </summary>
         /// <param name="array"></param>
         /// <returns></returns>
-        public static string ConvertStringArrayToString(string[] array)
+        public static string ConvertStringArrayToString(IEnumerable<string> array)
         {
             //
             // Concatenate all the elements into a StringBuilder.
             //
-            StringBuilder builder = new StringBuilder();
-            foreach (string value in array)
+            var builder = new StringBuilder();
+            foreach (var value in array)
             {
                 builder.Append(value);
                 builder.Append(' ');
@@ -316,21 +326,21 @@ namespace BlueRose
         /// </summary>
         /// <param name="array"></param>
         /// <returns></returns>
-        public static string ConvertStringArrayToStringJoin(string[] array)
+        public static string ConvertStringArrayToStringJoin(IEnumerable<string> array)
         {
             //
             // Use string Join to concatenate the string elements.
             //
-            string result = string.Join(".", array);
+            var result = string.Join(".", array);
             return result;
         }
 
 
         public static void distUnZip(string dist)
         {
-            using (ZipFile zip2 = ZipFile.Read(dist))
+            using (var zip2 = ZipFile.Read(dist))
             {
-                foreach (ZipEntry ex in zip2)
+                foreach (var ex in zip2)
                 {
                     ex.Extract(Environment.CurrentDirectory, ExtractExistingFileAction.OverwriteSilently);
                 }

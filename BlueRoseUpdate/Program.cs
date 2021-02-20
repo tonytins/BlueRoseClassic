@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+using System;
 using System.Net;
-using System.Net.NetworkInformation;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SimplyUpdate
@@ -67,8 +62,8 @@ namespace SimplyUpdate
             //
             // Concatenate all the elements into a StringBuilder.
             //
-            StringBuilder builder = new StringBuilder();
-            foreach (string value in array)
+            var builder = new StringBuilder();
+            foreach (var value in array)
             {
                 builder.Append(value);
                 builder.Append(' ');
@@ -81,7 +76,7 @@ namespace SimplyUpdate
             //
             // Use string Join to concatenate the string elements.
             //
-            string result = string.Join(".", array);
+            var result = string.Join(".", array);
             return result;
         }
     }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Diagnostics;
+using System;
 
 namespace ZACKUpdater
 {
@@ -17,7 +12,7 @@ namespace ZACKUpdater
         /// <param name="compressedFile"></param>
         public static void SelfUpdate(string processInfo, Uri address, string compressedFile)
         {
-            SelfUpdate install = new SelfUpdate();
+            var install = new SelfUpdate();
             install.Install(address, compressedFile, processInfo);
         }
 

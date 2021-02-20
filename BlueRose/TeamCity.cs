@@ -1,4 +1,4 @@
-﻿// Copyright(c) 2016 Blue Rose Project
+// Copyright(c) 2016 Blue Rose Project
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and 
 //  associated documentation files (the "Software"), to deal in the Software without restriction, including
@@ -15,7 +15,6 @@
 //  FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, 
 //  ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using Ionic.Zip;
 using System;
 using System.IO;
 using System.Net;
@@ -23,6 +22,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Ionic.Zip;
 
 namespace BlueRose
 {
@@ -31,12 +31,14 @@ namespace BlueRose
 
         public static Uri teamCityDist(string address = "servo.freeso.org", string buildType = "ProjectDollhouse_TsoClient", string buildId = "316")
         {
-            return new Uri(@"http://" + address + @"/repository/download/" + buildType + @"/" + buildId + @":id/dist-" + WhiteRose.DistNumLegacy() + ".zip");
+            return new Uri(
+                $@"http://{address}/repository/download/{buildType}/{buildId}:id/dist-{WhiteRose.DistNumLegacy()}.zip");
         }
 
         public static Uri teamCityAddress(string address = "servo.freeso.org", string buildType = "ProjectDollhouse_TsoClient")
         {
-            return new Uri(@"http://" + address + "/guestAuth/downloadArtifacts.html?buildTypeId=" + buildType + "&buildId=lastSuccessful");
+            return new Uri(
+                $@"http://{address}/guestAuth/downloadArtifacts.html?buildTypeId={buildType}&buildId=lastSuccessful");
         }
 
         /// <summary>
@@ -49,16 +51,17 @@ namespace BlueRose
         {
             try
             {
-                WebClient client = new WebClient();
+                var client = new WebClient();
 
-                Uri uri = new Uri(@"http://" + address + "/guestAuth/downloadArtifacts.html?buildTypeId=" + buildType + "&buildId=lastSuccessful");
+                var uri = new Uri(
+                    $@"http://{address}/guestAuth/downloadArtifacts.html?buildTypeId={buildType}&buildId=lastSuccessful");
                 distFile = Path.GetFileName(uri.LocalPath);
 
                 client.DownloadFileAsync(tcAddress(address, buildType), distFile);
 
-                using (ZipFile buildUnpack = ZipFile.Read(distFile))
+                using (var buildUnpack = ZipFile.Read(distFile))
                 {
-                    foreach (ZipEntry ex in buildUnpack)
+                    foreach (var ex in buildUnpack)
                     {
                         ex.Extract(Environment.CurrentDirectory, ExtractExistingFileAction.OverwriteSilently);
                     }
@@ -77,17 +80,17 @@ namespace BlueRose
         /// <returns>sLine</returns>
         public static string distNum()
         {
-            string url = "http://servo.freeso.org/externalStatus.html?js=1";
-            WebRequest wrGETURL;
-            wrGETURL = WebRequest.Create(url);
+            var url = "http://servo.freeso.org/externalStatus.html?js=1";
+            WebRequest wrGeturl;
+            wrGeturl = WebRequest.Create(url);
             Stream objStream;
-            objStream = wrGETURL.GetResponse().GetResponseStream();
-            StreamReader objReader = new StreamReader(objStream);
-            string sLine = "";
+            objStream = wrGeturl.GetResponse().GetResponseStream();
+            var objReader = new StreamReader(objStream);
+            var sLine = "";
             string fll;
             fll = objReader.ReadLine();
             sLine = fll.Remove(0, 855);
-            sLine = sLine.Remove(sLine.IndexOf("</a>"));
+            sLine = sLine.Remove(sLine.IndexOf("</a>", StringComparison.Ordinal));
             return sLine;
         }
 
@@ -98,9 +101,9 @@ namespace BlueRose
         /// <returns></returns>
         public static async Task<string> distNum(string website)
         {
-            HttpClient http = new HttpClient();
+            var http = new HttpClient();
             var reponse = await http.GetByteArrayAsync(website);
-            String source = Encoding.GetEncoding("dist-").GetString(reponse, 0, reponse.Length - 1);
+            var source = Encoding.GetEncoding("dist-").GetString(reponse, 0, reponse.Length - 1);
             source = WebUtility.HtmlDecode(source);
             // html.HtmlDocument result = new html.HtmlDocument();
             // result.LoadHtml(source);
@@ -115,14 +118,14 @@ namespace BlueRose
         /// <param name="distFile"></param>
         public static void tcUnpack(string distFile = "teamcity.zip")
         {
-            using (ZipFile buildUnpack = ZipFile.Read(distFile))
+            using (var buildUnpack = ZipFile.Read(distFile))
             {
                 buildUnpack.ExtractAll(Environment.CurrentDirectory, ExtractExistingFileAction.OverwriteSilently);
             }
 
             File.Delete(distFile);
 
-            WhiteRose.wildUnZip();
+            WhiteRose.WildUnZip();
 
             /* using (ZipFile build2Unpack = ZipFile.Read("dist-" + distNum() + ".zip"))
             {
@@ -140,7 +143,8 @@ namespace BlueRose
         {
             try
             {
-                Uri uri = new Uri(@"http://" + address + "/guestAuth/downloadArtifacts.html?buildTypeId=" + buildType + "&buildId=lastSuccessful");
+                var uri = new Uri(
+                    $@"http://{address}/guestAuth/downloadArtifacts.html?buildTypeId={buildType}&buildId=lastSuccessful");
                 distFile = Path.GetFileName(uri.LocalPath);
                 return distFile;
             }
@@ -161,7 +165,8 @@ namespace BlueRose
         {
             try
             {
-                return new Uri(@"http://" + address + "/guestAuth/downloadArtifacts.html?buildTypeId=" + buildType + "&buildId=lastSuccessful?guest=1");
+                return new Uri(
+                    $@"http://{address}/guestAuth/downloadArtifacts.html?buildTypeId={buildType}&buildId=lastSuccessful?guest=1");
             }
             catch (Exception ex)
             {

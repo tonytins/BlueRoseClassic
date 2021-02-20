@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ZACKUpdater
 {
@@ -11,10 +8,10 @@ namespace ZACKUpdater
     {
         public static void GC()
         {
-            DirectoryInfo di = new DirectoryInfo(Environment.CurrentDirectory);
-            FileInfo[] files = di.GetFiles("*.zip").Where(p => p.Extension == ".zip").ToArray();
+            var di = new DirectoryInfo(Environment.CurrentDirectory);
+            var files = di.GetFiles("*.zip").Where(p => p.Extension == ".zip").ToArray();
 
-            foreach (FileInfo file in files)
+            foreach (var file in files)
             {
                 try
                 {

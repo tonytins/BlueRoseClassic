@@ -1,6 +1,14 @@
 # Blue Rose
-![](https://raw.githubusercontent.com/ZackCasey/BlueRoseLauncher/master/bluerose-snapshot.png)
 
-Blue Rose is an launcher that also provides news and updates regarding FreeSO by embedding the Road to Live Release and itself at their own respected threads. It replaces Project Dollhouse's and is in a filler until FreeSO makes has it's own official one.
+Blue Rose is an general purpose launcher for updating applications or games.
 
-* Make sure to put it into the **same folder** as FreeSO.
+## Requirements
+
+### Prerequisites
+
+* .NET Framework SDK
+* .NET 5 SDK
+
+## License
+
+I license this project under the GNU GPL-2.0 license - see the [LICENSE](LICENSE) file for details.
