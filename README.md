@@ -1,6 +1,6 @@
-# Blue Rose
+# Blue Rose Core
 
-Blue Rose is an general purpose launcher for updating applications or games.
+Blue Rose Core is an general purpose launcher for updating applications or games.
 
 ## Requirements
 
