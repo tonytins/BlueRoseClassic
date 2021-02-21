@@ -3,12 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueRose", "BlueRose\BlueRose.csproj", "{DC049B5A-733A-4137-AE58-2495517ECA2F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueRoseUpdate", "BlueRoseUpdate\BlueRoseUpdate.csproj", "{798F1669-354F-4ED1-AEE4-05C82314F00E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZACKUpdater", "ZACKUpdater\ZACKUpdater.csproj", "{EF5CA42A-7D99-4F47-B6F1-7BD4532150D2}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1623CCF2-E81F-42AC-93BC-EDE69F6921CD}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
@@ -16,7 +10,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlueRoseCore", "BlueRoseCore\BlueRoseCore.csproj", "{60651B72-6FBE-4D8E-8276-7727212C3030}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueRose.Github.Releases.Tests", "BlueRose.Github.Releases.Tests\BlueRose.Github.Releases.Tests.csproj", "{2CDDA4DE-3560-4BDD-8C48-FE355583FDEA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Classic", "Classic", "{12E0BCF8-A4B8-4D83-A69E-3338550FD03E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueRose.Core.Bootstrap", "BlueRose.Core.Bootstrap\BlueRose.Core.Bootstrap.csproj", "{EB864004-08BB-4C5E-B9C4-8E1280B4841C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlueRose.Github.Releases", "BlueRose.Github.Releases\BlueRose.Github.Releases.csproj", "{E3646BA6-9D22-4856-AA92-A86EC43E115E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueRose.Classic.Bootstrap", "BlueRose.Classic.Bootstrap\BlueRose.Classic.Bootstrap.csproj", "{798F1669-354F-4ED1-AEE4-05C82314F00E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueRose.Classic.Client", "BlueRose.Classic.Client\BlueRose.Classic.Client.csproj", "{DC049B5A-733A-4137-AE58-2495517ECA2F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,25 +28,33 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DC049B5A-733A-4137-AE58-2495517ECA2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DC049B5A-733A-4137-AE58-2495517ECA2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DC049B5A-733A-4137-AE58-2495517ECA2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DC049B5A-733A-4137-AE58-2495517ECA2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CDDA4DE-3560-4BDD-8C48-FE355583FDEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CDDA4DE-3560-4BDD-8C48-FE355583FDEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CDDA4DE-3560-4BDD-8C48-FE355583FDEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CDDA4DE-3560-4BDD-8C48-FE355583FDEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB864004-08BB-4C5E-B9C4-8E1280B4841C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB864004-08BB-4C5E-B9C4-8E1280B4841C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB864004-08BB-4C5E-B9C4-8E1280B4841C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB864004-08BB-4C5E-B9C4-8E1280B4841C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3646BA6-9D22-4856-AA92-A86EC43E115E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3646BA6-9D22-4856-AA92-A86EC43E115E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3646BA6-9D22-4856-AA92-A86EC43E115E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3646BA6-9D22-4856-AA92-A86EC43E115E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{798F1669-354F-4ED1-AEE4-05C82314F00E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{798F1669-354F-4ED1-AEE4-05C82314F00E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{798F1669-354F-4ED1-AEE4-05C82314F00E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{798F1669-354F-4ED1-AEE4-05C82314F00E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EF5CA42A-7D99-4F47-B6F1-7BD4532150D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EF5CA42A-7D99-4F47-B6F1-7BD4532150D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EF5CA42A-7D99-4F47-B6F1-7BD4532150D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EF5CA42A-7D99-4F47-B6F1-7BD4532150D2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{60651B72-6FBE-4D8E-8276-7727212C3030}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{60651B72-6FBE-4D8E-8276-7727212C3030}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{60651B72-6FBE-4D8E-8276-7727212C3030}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{60651B72-6FBE-4D8E-8276-7727212C3030}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC049B5A-733A-4137-AE58-2495517ECA2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC049B5A-733A-4137-AE58-2495517ECA2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC049B5A-733A-4137-AE58-2495517ECA2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC049B5A-733A-4137-AE58-2495517ECA2F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{798F1669-354F-4ED1-AEE4-05C82314F00E} = {12E0BCF8-A4B8-4D83-A69E-3338550FD03E}
+		{DC049B5A-733A-4137-AE58-2495517ECA2F} = {12E0BCF8-A4B8-4D83-A69E-3338550FD03E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {14481068-E5FD-4F4C-A3BE-AEC37B7F6528}

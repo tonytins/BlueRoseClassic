@@ -1,0 +1,185 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+
+
+    <PropertyGroup>
+
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+
+
+
+        <IsPackable>false</IsPackable>
+
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Remove="NewFolder\**" />
+        <EmbeddedResource Remove="NewFolder\**" />
+        <None Remove="NewFolder\**" />
+    </ItemGroup>
+
+
+
+    <ItemGroup>
+
+        <PackageReference Include="NUnit" Version="3.12.0" />
+
+        <PackageReference Include="NUnit3TestAdapter" Version="3.16.1" />
+
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
+
+    </ItemGroup>
+
+
+
+    <ItemGroup>
+
+        <ProjectReference Include="..\BlueRose.Github.Releases\BlueRose.Github.Releases.csproj" />
+
+    </ItemGroup>
+
+
+
+    <ItemGroup>
+
+        <None Update="assets\.gitkeep">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+
+        <None Update="stubs\assets_headers_200.txt">
+
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+
+        </None>
+
+        <None Update="stubs\assets_response_200.txt">
+
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+
+        </None>
+
+        <None Update="stubs\empty_headers_200.txt">
+
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+
+        </None>
+
+        <None Update="stubs\empty_response_200.txt">
+
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+
+        </None>
+
+        <None Update="stubs\get-latest_headers_200.txt">
+
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+
+        </None>
+
+        <None Update="stubs\get-latest_response_200.txt">
+
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+
+        </None>
+
+        <None Update="stubs\page1_headers_200.txt">
+
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+
+        </None>
+
+        <None Update="stubs\page1_response_200.txt">
+
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+
+        </None>
+
+        <None Update="stubs\page2_headers_200.txt">
+
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+
+        </None>
+
+        <None Update="stubs\page2_response_200.txt">
+
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+
+        </None>
+
+        <None Update="stubs\page3_headers_200.txt">
+
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+
+        </None>
+
+        <None Update="stubs\page3_response_200.txt">
+
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+
+        </None>
+
+        <None Update="stubs\page4_headers_200.txt">
+
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+
+        </None>
+
+        <None Update="stubs\page4_response_200.txt">
+
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+
+        </None>
+
+        <None Update="stubs\page5_headers_200.txt">
+
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+
+        </None>
+
+        <None Update="stubs\page5_response_200.txt">
+
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+
+        </None>
+
+        <None Update="stubs\rate-limit_headers_403.txt">
+
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+
+        </None>
+
+        <None Update="stubs\rate-limit_response_403.txt">
+
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+
+        </None>
+
+        <None Update="stubs\repo-not-found_headers_404.txt">
+
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+
+        </None>
+
+        <None Update="stubs\repo-not-found_response_404.txt">
+
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+
+        </None>
+
+    </ItemGroup>
+
+
+
+    <ItemGroup>
+
+
+
+        <Folder Include="assets\" />
+
+    </ItemGroup>
+
+
+
+
+
+</Project>

@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net5.0-windows</TargetFramework>
+        <UseWindowsForms>true</UseWindowsForms>
+        <AssemblyName>BlueRose</AssemblyName>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="GitInfo" Version="2.1.2">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\GitHub.ReleaseDownloader\BlueRose.Github.Releases.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Update="BlueRoseGUI.cs">
+            <SubType>Form</SubType>
+        </Compile>
+        <Compile Update="BlueRoseGUI.Designer.cs">
+            <DependentUpon>BlueRoseGUI.cs</DependentUpon>
+        </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Update="BlueRoseGUI.resx">
+            <DependentUpon>BlueRoseGUI.cs</DependentUpon>
+        </EmbeddedResource>
+    </ItemGroup>
+
+</Project>
