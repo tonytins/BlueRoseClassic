@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueRose.Classic.Bootstrap"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueRose.Classic.Client", "BlueRose.Classic.Client\BlueRose.Classic.Client.csproj", "{DC049B5A-733A-4137-AE58-2495517ECA2F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlueRose.Core.Client", "BlueRose.Core.Client\BlueRose.Core.Client.csproj", "{06246540-BA54-4C58-92F9-FE5ABD28BC73}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +50,10 @@ Global
 		{DC049B5A-733A-4137-AE58-2495517ECA2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC049B5A-733A-4137-AE58-2495517ECA2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC049B5A-733A-4137-AE58-2495517ECA2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06246540-BA54-4C58-92F9-FE5ABD28BC73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06246540-BA54-4C58-92F9-FE5ABD28BC73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06246540-BA54-4C58-92F9-FE5ABD28BC73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06246540-BA54-4C58-92F9-FE5ABD28BC73}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

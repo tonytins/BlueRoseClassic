@@ -8,14 +8,14 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="GitInfo" Version="2.1.2">
-        <PrivateAssets>all</PrivateAssets>
-        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      </PackageReference>
+        <PackageReference Include="GitInfo" Version="2.1.2">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\GitHub.ReleaseDownloader\BlueRose.Github.Releases.csproj" />
+        <ProjectReference Include="..\BlueRose.Github.Releases\BlueRose.Github.Releases.csproj" />
     </ItemGroup>
 
     <ItemGroup>
