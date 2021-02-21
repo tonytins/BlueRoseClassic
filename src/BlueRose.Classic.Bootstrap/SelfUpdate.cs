@@ -13,18 +13,18 @@ namespace BlueRose.Classic.Bootstrap
     {
         readonly WebClient _client = new WebClient();
 
-        private string downloadedFile { get; set; }
-        public static string newProccessInfo { get; set; }
+        string downloadedFile { get; set; }
+        public static string NewProccessInfo { get; set; }
 
         public void Install(Uri address, string compressedFile, string newProcess)
         {
             _client.DownloadFileCompleted += new AsyncCompletedEventHandler(ExtractExit);
             _client.DownloadFileAsync(address, compressedFile);
-            newProccessInfo = newProcess;
+            NewProccessInfo = newProcess;
             downloadedFile = compressedFile;
         }
 
-        private void ExtractExit(object sender, AsyncCompletedEventArgs e)
+        void ExtractExit(object sender, AsyncCompletedEventArgs e)
         {
             try
             {
@@ -40,9 +40,7 @@ namespace BlueRose.Classic.Bootstrap
 
                 try
                 {
-                    var newProccess = new ProcessStartInfo(newProccessInfo);
-                    newProccess.UseShellExecute = true;
-                    newProccess.Verb = "runas";
+                    var newProccess = new ProcessStartInfo(NewProccessInfo) { UseShellExecute = true, Verb = "runas" };
                     Process.Start(newProccess);
                     Environment.Exit(0);
                 }

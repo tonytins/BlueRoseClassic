@@ -23,6 +23,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueRose.Classic.Client", "BlueRose.Classic.Client\BlueRose.Classic.Client.csproj", "{DC049B5A-733A-4137-AE58-2495517ECA2F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlueRose.Core.Client", "BlueRose.Core.Client\BlueRose.Core.Client.csproj", "{06246540-BA54-4C58-92F9-FE5ABD28BC73}"
+	ProjectSection(ProjectDependencies) = postProject
+		{EB864004-08BB-4C5E-B9C4-8E1280B4841C} = {EB864004-08BB-4C5E-B9C4-8E1280B4841C}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

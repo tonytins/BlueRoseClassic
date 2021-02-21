@@ -5,7 +5,7 @@ namespace BlueRose.Classic.Client
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        System.ComponentModel.IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -26,7 +26,7 @@ namespace BlueRose.Classic.Client
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
+        void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BlueRoseGUI));
             this.playBtn = new System.Windows.Forms.Button();
@@ -174,15 +174,15 @@ namespace BlueRose.Classic.Client
 
         #endregion
 
-        private System.Windows.Forms.Button playBtn;
-        private System.Windows.Forms.Button devBtn;
-        private System.Windows.Forms.Button btnUpdate;
-        private System.Windows.Forms.Button btnUpdateLauncher;
-        private System.Windows.Forms.Label localBuild;
-        private System.Windows.Forms.Label versionIS;
-        private System.Windows.Forms.Label latestBuild;
-        private System.Windows.Forms.Label onlineBuildLabel;
-        private System.Windows.Forms.TextBox parmaBox;
-        private System.Windows.Forms.ProgressBar idleProgressBar;
+        System.Windows.Forms.Button playBtn;
+        System.Windows.Forms.Button devBtn;
+        System.Windows.Forms.Button btnUpdate;
+        System.Windows.Forms.Button btnUpdateLauncher;
+        System.Windows.Forms.Label localBuild;
+        System.Windows.Forms.Label versionIS;
+        System.Windows.Forms.Label latestBuild;
+        System.Windows.Forms.Label onlineBuildLabel;
+        System.Windows.Forms.TextBox parmaBox;
+        System.Windows.Forms.ProgressBar idleProgressBar;
     }
 }

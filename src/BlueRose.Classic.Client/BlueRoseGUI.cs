@@ -18,7 +18,7 @@ namespace BlueRose.Classic.Client
 {
     public partial class BlueRoseGUI : Form
     {
-        private readonly string _errorBtn = "ERROR";
+        readonly string _errorBtn = "ERROR";
         readonly WebClient _client = new WebClient();
         string _netBuild = $"#{WhiteRose.DistNumLegacy()}";
         readonly string _buildFile = "fsobuild";
@@ -42,7 +42,7 @@ namespace BlueRose.Classic.Client
 
         }
 
-        private void updaterdownload(object sender, AsyncCompletedEventArgs e)
+        void updaterdownload(object sender, AsyncCompletedEventArgs e)
         {
             using (var zip2 = ZipFile.Read(_simplyupdate))
             {
@@ -55,18 +55,18 @@ namespace BlueRose.Classic.Client
             Process.Start("SimplyUpdate.exe");
         }
 
-        private void playBtn_Click(object sender, EventArgs e)
+        void playBtn_Click(object sender, EventArgs e)
         {
             WhiteRose.StartFSO("FreeSO.exe", parmaBox.Text);
 
         }
 
-        private void devBtn_Click(object sender, EventArgs e)
+        void devBtn_Click(object sender, EventArgs e)
         {
             WhiteRose.StartFSO("FSO.IDE.exe", parmaBox.Text);
         }
 
-        private void BlueRoseGUI_Load(object sender, EventArgs e)
+        void BlueRoseGUI_Load(object sender, EventArgs e)
         {
             WhiteRose.ZipGC();
 
@@ -117,7 +117,7 @@ namespace BlueRose.Classic.Client
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnUpdate_Click(object sender, EventArgs e)
+        void btnUpdate_Click(object sender, EventArgs e)
         {
 
             try
@@ -181,7 +181,7 @@ namespace BlueRose.Classic.Client
         }
 
 
-        private void btnUpdateLauncher_Click(object sender, EventArgs e)
+        void btnUpdateLauncher_Click(object sender, EventArgs e)
         {
             try
             {
@@ -204,7 +204,7 @@ namespace BlueRose.Classic.Client
             }
         }
 
-        private void onlineBuildLabel_Click(object sender, EventArgs e)
+        void onlineBuildLabel_Click(object sender, EventArgs e)
         {
             try
             {

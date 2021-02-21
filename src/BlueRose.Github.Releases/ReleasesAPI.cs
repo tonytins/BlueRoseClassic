@@ -6,8 +6,7 @@ using Newtonsoft.Json;
 
 namespace BlueRose.Github.Releases
 {
-    // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse); 
-    public class Author
+    internal class Author
     {
         [JsonProperty("login")]
         public string Login { get; set; }
@@ -64,7 +63,7 @@ namespace BlueRose.Github.Releases
         public bool SiteAdmin { get; set; }
     }
 
-    public class Uploader
+    internal class Uploader
     {
         [JsonProperty("login")]
         public string Login { get; set; }
@@ -121,7 +120,7 @@ namespace BlueRose.Github.Releases
         public bool SiteAdmin { get; set; }
     }
 
-    public class Asset
+    internal class Asset
     {
         [JsonProperty("url")]
         public string Url { get; set; }
@@ -163,7 +162,7 @@ namespace BlueRose.Github.Releases
         public Uploader Uploader { get; set; }
     }
 
-    public class ReleaseAPI
+    internal class ReleaseAPI
     {
         [JsonProperty("url")]
         public string Url { get; set; }

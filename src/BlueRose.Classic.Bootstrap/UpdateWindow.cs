@@ -1,6 +1,7 @@
 // This project is licensed under the GNU GPL-2.0 license.
 // See the LICENSE file in the project root for more information.
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows.Forms;
 
@@ -10,14 +11,14 @@ namespace BlueRose.Classic.Bootstrap
     {
         readonly Uri _address = new Uri(@"https://dl.dropboxusercontent.com/u/42345729/bluerose.zip");
         static readonly string _program = "BlueRoseLauncher.exe";
-        public static string[] updateParmas { get; set; }
+        public static IEnumerable<string> UpdateParmas { get; set; }
 
         public UpdateWindow()
         {
             InitializeComponent();
         }
 
-        private void UpdateWindow_Load(object sender, EventArgs e)
+        void UpdateWindow_Load(object sender, EventArgs e)
         {
             useLessProgressBar.Style = ProgressBarStyle.Marquee;
             useLessProgressBar.MarqueeAnimationSpeed = 50;
@@ -31,10 +32,15 @@ namespace BlueRose.Classic.Bootstrap
                 MessageBox.Show(ex.Message);
                 try
                 {
-                    var launcherProcess = new Process();
+                    var launcherProcess = new Process
+                    {
+                        StartInfo =
+                        {
+                            FileName = _program,
+                            UseShellExecute = true
+                        }
+                    };
 
-                    launcherProcess.StartInfo.FileName = _program;
-                    launcherProcess.StartInfo.UseShellExecute = true;
                     launcherProcess.Start();
                     Application.Exit();
                 }

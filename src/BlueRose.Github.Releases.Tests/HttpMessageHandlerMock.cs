@@ -98,7 +98,7 @@ namespace BlueRose.Github.Releases.Tests
             return await Task.FromResult(responseMessage);
         }
 
-        private static void AddHeaders(HttpResponseMessage responseMessage, string headersString)
+        static void AddHeaders(HttpResponseMessage responseMessage, string headersString)
         {
             var headerLines = headersString.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
             foreach (var headerLine in headerLines)

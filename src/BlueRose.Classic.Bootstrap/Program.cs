@@ -15,7 +15,7 @@ namespace BlueRose.Classic.Bootstrap
         [STAThread]
         static void Main(string[] args)
         {
-            UpdateWindow.updateParmas = args;
+            UpdateWindow.UpdateParmas = args;
             /*
             Ping pinger = new Ping();
             bool pingable = false;

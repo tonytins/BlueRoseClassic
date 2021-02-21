@@ -17,8 +17,8 @@ namespace BlueRose.Github.Releases
 {
     public class ReleaseDownloader : IReleaseDownloader
     {
-        private readonly string _releasesEndpoint;
-        private readonly IReleaseDownloaderSettings _settings;
+        readonly string _releasesEndpoint;
+        readonly IReleaseDownloaderSettings _settings;
 
         public ReleaseDownloader(IReleaseDownloaderSettings settings)
         {
@@ -65,10 +65,10 @@ namespace BlueRose.Github.Releases
             _settings.HTTPClient.DefaultRequestHeaders.Remove("User-Agent");
         }
 
-        private static string CleanVersion(string version)
+        static string CleanVersion(string version)
         {
             var cleanedVersion = version;
-            cleanedVersion = cleanedVersion.StartsWith("v") ? cleanedVersion.Substring(1) : cleanedVersion;
+            cleanedVersion = cleanedVersion.StartsWith("v") ? cleanedVersion[1..] : cleanedVersion;
             var buildDelimiterIndex = cleanedVersion.LastIndexOf("+", StringComparison.Ordinal);
             cleanedVersion = buildDelimiterIndex > 0
                 ? cleanedVersion.Substring(0, buildDelimiterIndex)
@@ -77,7 +77,7 @@ namespace BlueRose.Github.Releases
         }
 
         // ReSharper disable once ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator
-        private KeyValuePair<string, SemVersion> GetLatestRelease()
+        KeyValuePair<string, SemVersion> GetLatestRelease()
         {
             var releases = GetReleasesAsync().Result;
             var latestRelease = releases.First();
@@ -90,7 +90,7 @@ namespace BlueRose.Github.Releases
         }
 
         // ReSharper disable once SwitchStatementMissingSomeCases
-        private static void VerifyGitHubAPIResponse(HttpStatusCode statusCode, string content)
+        static void VerifyGitHubAPIResponse(HttpStatusCode statusCode, string content)
         {
             switch (statusCode)
             {
@@ -107,7 +107,7 @@ namespace BlueRose.Github.Releases
             }
         }
 
-        private async Task<List<string>> GetAssetUrlsAsync(string releaseId)
+        async Task<List<string>> GetAssetUrlsAsync(string releaseId)
         {
             var assetsEndpoint = $"{_releasesEndpoint}/{releaseId}/assets";
             var response = await _settings.HTTPClient.GetAsync(new Uri(assetsEndpoint));
@@ -119,16 +119,14 @@ namespace BlueRose.Github.Releases
         }
 
         // ReSharper disable once AssignNullToNotNullAttribute
-        private void GetAssetsAsync(string assetUrl)
+        void GetAssetsAsync(string assetUrl)
         {
             try
             {
                 var path = Path.Combine(_settings.DownloadDirPath, Path.GetFileName(assetUrl));
-                using (var client = new WebClient())
-                {
-                    Console.WriteLine($"{assetUrl} | {path}");
-                    client.DownloadFile(new Uri(assetUrl), path);
-                }
+                using var client = new WebClient();
+                Console.WriteLine($"{assetUrl} | {path}");
+                client.DownloadFile(new Uri(assetUrl), path);
             }
             catch (Exception ex)
             {
@@ -137,7 +135,7 @@ namespace BlueRose.Github.Releases
             }
         }
 
-        private async Task<Dictionary<string, SemVersion>> GetReleasesAsync()
+        async Task<Dictionary<string, SemVersion>> GetReleasesAsync()
         {
             var pageNumber = "1";
             var releases = new Dictionary<string, SemVersion>();
@@ -169,7 +167,7 @@ namespace BlueRose.Github.Releases
             return releases;
         }
 
-        private static string GetNextPageNumber(HttpHeaders headers)
+        static string GetNextPageNumber(HttpHeaders headers)
         {
             string linkHeader;
             try

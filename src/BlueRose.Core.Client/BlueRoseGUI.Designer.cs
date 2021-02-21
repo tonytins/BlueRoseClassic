@@ -6,7 +6,7 @@ namespace BlueRose.Core.Client
         /// <summary>
         ///  Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        System.ComponentModel.IContainer components = null;
 
         /// <summary>
         ///  Clean up any resources being used.
@@ -27,7 +27,7 @@ namespace BlueRose.Core.Client
         ///  Required method for Designer support - do not modify
         ///  the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
+        void InitializeComponent()
         {
             this.launchBtn = new System.Windows.Forms.Button();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
@@ -102,10 +102,10 @@ namespace BlueRose.Core.Client
 
         #endregion
 
-        private System.Windows.Forms.Button launchBtn;
-        private System.Windows.Forms.ProgressBar progressBar1;
-        private System.Windows.Forms.Button updateSelf;
-        private System.Windows.Forms.Button updateApp;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        System.Windows.Forms.Button launchBtn;
+        System.Windows.Forms.ProgressBar progressBar1;
+        System.Windows.Forms.Button updateSelf;
+        System.Windows.Forms.Button updateApp;
+        System.Windows.Forms.RichTextBox richTextBox1;
     }
 }

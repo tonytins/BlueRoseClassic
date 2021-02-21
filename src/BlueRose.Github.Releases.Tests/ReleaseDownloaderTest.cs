@@ -24,11 +24,11 @@ namespace BlueRose.Github.Releases.Tests
             _downloader.DeInit();
         }
 
-        private const string Author = "sixam";
-        private const string Repo = "isow";
-        private HttpClient _httpClient;
-        private string _downloadDirPath;
-        private IReleaseDownloader _downloader;
+        const string Author = "sixam";
+        const string Repo = "isow";
+        HttpClient _httpClient;
+        string _downloadDirPath;
+        IReleaseDownloader _downloader;
 
         [Test]
         public void DeInit_RemovesAgentHeader()
