@@ -45,6 +45,6 @@ httpClient.Dispose();
 * Will not compare and silently skip over GitHub releases that aren't Semver-compliant.
 * GitHub API calls are made anonymously and subject to rate limits.
 
-## How To Contribute
+## License
 
-Feel free to open an issue or submit a PR.
+I license this project under the MIT license - see the [LICENSE](LICENSE) file for details.

@@ -12,9 +12,9 @@ There have been plenty of attempts to rewrite Blue Rose into something more gene
 
 ### Prerequisites
 
-* .NET Framework SDK
+* Windows 10 1703+ or 7 SP1
+* Visual Studio 2019 16.8+
 * .NET 5 SDK
-
 ## License
 
 I license this project under the GNU GPL-2.0 license - see the [LICENSE](LICENSE) file for details.
